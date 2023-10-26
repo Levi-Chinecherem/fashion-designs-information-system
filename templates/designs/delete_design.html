@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Design - Fashion Designs Information System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="display-4">Confirm Deletion</h2>
+        <p>Are you sure you want to delete "{{ design.title }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">
+                <i class="fas fa-trash"></i> Yes, delete 🗑️👗
+            </button>
+        </form>
+        <a class="btn btn-secondary" href="{% url 'design_detail' design.id %}">
+            <i class="fas fa-undo"></i> Cancel 🚫
+        </a>
+    </div>
+{% endblock %}

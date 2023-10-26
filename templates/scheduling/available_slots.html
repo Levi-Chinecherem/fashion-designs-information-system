@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Available Slots - Fashion Designs Information System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="display-4">Available Slots</h2>
+        <ul class="list-group">
+            {% for slot in available_slots %}
+                <li class="list-group-item">
+                    <h3>Designer: {{ slot.designer.username }}</h3>
+                    <p>Date: {{ slot.date }}</p>
+                    <p>Start Time: {{ slot.start_time }}</p>
+                    <p>End Time: {{ slot.end_time }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

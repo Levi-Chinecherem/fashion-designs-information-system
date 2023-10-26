@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Design - Fashion Designs Information System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="display-4">Upload a Design</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p|safe }}
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-upload"></i> Upload 📤
+            </button>
+        </form>
+        <a class="btn btn-secondary" href="{% url 'design_list' %}">
+            <i class="fas fa-arrow-left"></i> Back to Your Designs 🏠
+        </a>
+    </div>
+    <script>
+        CKEDITOR.replace('id_content');
+        CKEDITOR.replace('id_short_description');
+    </script>
+{% endblock %}

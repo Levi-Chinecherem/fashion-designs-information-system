@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Appointment - Fashion Designs Information System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="display-4">Update Appointment</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="{{ form.date.id_for_label }}">Date</label>
+                <input type="date" class="form-control" id="{{ form.date.id_for_label }}" name="{{ form.date.name }}" placeholder="Select a date">
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.start_time.id_for_label }}">Start Time</label>
+                <input type="time" class="form-control" id="{{ form.start_time.id_for_label }}" name="{{ form.start_time.name }}" placeholder="Set start time">
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.end_time.id_for_label }}">End Time</label>
+                <input type="time" class="form-control" id="{{ form.end_time.id_for_label }}" name="{{ form.end_time.name }}" placeholder="Set end time">
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.status.id_for_label }}">Status</label>
+                <select class="form-control" id="{{ form.status.id_for_label }}" name="{{ form.status.name }}">
+                    <option value="pending" {% if form.status.value == "pending" %}selected{% endif %}>Pending</option>
+                    <option value="processing" {% if form.status.value == "processing" %}selected{% endif %}>Processing</option>
+                    <option value="done" {% if form.status.value == "done" %}selected{% endif %}>Done</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.description.id_for_label }}">Description</label>
+                <textarea class="form-control" id="{{ form.description.id_for_label }}" name="{{ form.description.name }}" placeholder="Enter a description"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Appointment <i class="fas fa-calendar-check"></i>📅</button>
+        </form>
+    </div>
+{% endblock %}

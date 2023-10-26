@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Design Detail - Fashion Designs Information System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="display-4">Design Detail</h2>
+        <br>
+        <div class="mt-3">
+            {{ design.content|safe }}
+        </div>
+        <a class="btn btn-primary" href="{% url 'update_design' design.id %}">
+            <i class="fas fa-pen"></i> Edit Design 🎨
+        </a>
+        <a class="btn btn-danger" href="{% url 'delete_design' design.id %}">
+            <i class="fas fa-trash"></i> Delete Design 🗑️
+        </a>
+        <a class="btn btn-secondary" href="{% url 'design_list' %}">
+            <i class="fas fa-arrow-left"></i> Back to Your Designs 🏠
+        </a>
+    </div>
+{% endblock %}

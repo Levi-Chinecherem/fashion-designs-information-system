@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Success - Fashion Designs Information System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="display-4">Message Sent</h2>
+        <p>Your message has been sent successfully. We'll get back to you soon.</p>
+        <a class="btn btn-primary" href="{% url 'home' %}">Back to Home</a>
+    </div>
+{% endblock %}

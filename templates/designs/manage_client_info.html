@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Client Information - Fashion Designs Information System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="display-4">Manage Your Client Information</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p|safe }}
+            <button class="btn btn-primary" type="submit">
+                <i class="fas fa-save"></i> Save 💾
+            </button>
+        </form>
+    </div>
+{% endblock %}

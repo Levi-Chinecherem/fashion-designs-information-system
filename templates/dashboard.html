@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Fashion Designs Information System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="dashboard">
+            <h2 class="display-4">Welcome, {{ username }}!</h2>
+            <div class="fashion-items">
+                <h3 class="mt-4">Your Fashion Items</h3>
+                <ul>
+                    {% for item in fashion_items %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

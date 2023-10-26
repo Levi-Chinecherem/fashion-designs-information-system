@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Appointment - Fashion Designs Information System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="display-4">Delete Appointment</h2>
+        <p>Are you sure you want to delete this appointment with {{ appointment.designer.username }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete Appointment <i class="fas fa-calendar-times"></i>📅</button>
+        </form>
+    </div>
+{% endblock %}

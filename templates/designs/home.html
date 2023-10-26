@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Fashion Designs Information System - Home{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <div class="jumbotron">
+            <h1 class="display-4">Welcome to the Fashion Designs Information System</h1>
+            <p class="lead">Your digital platform for fashion designers and customers to interact, share designs, schedule appointments, and manage fashion-related information.</p>
+            <hr class="my-4">
+            <p>This platform allows fashion designers to showcase their creativity and connect with clients. Customers can explore the latest fashion designs and schedule appointments with their favorite designers.</p>
+            <a class="btn btn-primary btn-lg" href="{% url 'design_list' %}" role="button">
+                Browse Designs <i class="fas fa-arrow-right"></i>👗
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>About Us</h2>
+                <p>Our mission is to provide a seamless experience for both fashion designers and clients. We believe in the power of creativity and collaboration, and our platform is designed to empower the fashion community.</p>
+            </div>
+            <div class="col-md-6">
+                <h2>Contact Us</h2>
+                <p>If you have any questions, feedback, or need support, feel free to reach out to our team. We're here to assist you in any way we can.</p>
+                <a class="btn btn-secondary" href="{% url 'contact_us' %}" role="button">Contact Us <i class="fas fa-envelope"></i>📧</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

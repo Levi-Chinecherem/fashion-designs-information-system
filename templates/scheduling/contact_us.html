@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - Fashion Designs Information System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="display-4">Contact Us</h2>
+        <div class="row">
+            <!-- Left Side: Contact Form -->
+            <div class="col-md-6">
+                <form method="post" class="contact-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Submit <i class="fas fa-paper-plane"></i>✉️</button>
+                </form>
+            </div>
+            <!-- Right Side: Background Image with GitHub Link -->
+            <div class="col-md-6">
+                <div class="bg-image">
+                    <a href="https://github.com/Levi-Chinecherem" target="_blank">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbjST7wBVAfoWj0Fptv1vZxghphu7zhmwZ86DMs3WV2srIctERnwjv8cmUUjOg14ZflbY&usqp=CAU" alt="Background Image">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
