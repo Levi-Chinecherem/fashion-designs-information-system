@@ -1,0 +1,131 @@
+# designs/views.py
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Design, Client
+from .forms import DesignForm, ClientForm
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
+
+def home(request):
+    return render(request, 'designs/home.html')
+
+@login_required
+def upload_design(request):
+    if request.method == 'POST':
+        form = DesignForm(request.POST, request.FILES)
+        if form.is_valid():
+            design = form.save(commit=False)
+            design.designer = request.user
+            design.save()
+            return redirect('design_list')
+    else:
+        form = DesignForm()
+    return render(request, 'designs/upload_design.html', {'form': form})
+
+@login_required
+def design_list(request):
+    designs = Design.objects.filter(designer=request.user)
+    return render(request, 'designs/design_list.html', {'designs': designs})
+
+@login_required
+def manage_client_info(request):
+    client, created = Client.objects.get_or_create(user=request.user)
+    if request.method == 'POST':
+        form = ClientForm(request.POST, instance=client)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ClientForm(instance=client)
+    return render(request, 'designs/manage_client_info.html', {'form': form})
+
+@login_required
+def design_detail(request, design_id):
+    design = get_object_or_404(Design, id=design_id, designer=request.user)
+    return render(request, 'designs/design_detail.html', {'design': design})
+
+@login_required
+def update_design(request, design_id):
+    design = get_object_or_404(Design, id=design_id, designer=request.user)
+
+    if request.method == 'POST':
+        form = DesignForm(request.POST, request.FILES, instance=design)
+        if form.is_valid():
+            form.save()
+            return redirect('design_list')
+    else:
+        form = DesignForm(instance=design)
+    return render(request, 'designs/update_design.html', {'form': form, 'design': design})
+
+@login_required
+def delete_design(request, design_id):
+    design = get_object_or_404(Design, id=design_id, designer=request.user)
+
+    if request.method == 'POST':
+        design.delete()
+        return redirect('design_list')
+
+    return render(request, 'designs/delete_design.html', {'design': design})
+
+# scheduling/views.py
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Appointment
+from .forms import AppointmentForm, ContactForm
+from .models import Availability
+from django.contrib.auth.models import User
+
+def contact_us(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('contact_success')
+    else:
+        form = ContactForm()
+    
+    return render(request, 'scheduling/contact_us.html', {'form': form})
+
+def contact_success(request):
+    return render(request, 'scheduling/contact_success.html')
+
+def view_available_slots(request):
+    available_slots = Availability.objects.all()
+    return render(request, 'scheduling/available_slots.html', {'available_slots': available_slots})
+
+@login_required
+def create_appointment(request):
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            appointment = form.save(commit=False)
+            appointment.client = request.user
+            appointment.save()
+            return redirect('appointment_list')
+    else:
+        form = AppointmentForm()
+        form.fields['designer'].queryset = User.objects.filter(groups__name='Designer')  # Filter users in the 'Designer' group
+    return render(request, 'scheduling/create_appointment.html', {'form': form})
+
+@login_required
+def appointment_list(request):
+    appointments = Appointment.objects.filter(client=request.user)
+    return render(request, 'scheduling/appointment_list.html', {'appointments': appointments})
+
+@login_required
+def update_appointment(request, appointment_id):
+    appointment = Appointment.objects.get(pk=appointment_id)
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST, instance=appointment)
+        if form.is_valid():
+            form.save()
+            return redirect('appointment_list')
+    else:
+        form = AppointmentForm(instance=appointment)
+    return render(request, 'scheduling/update_appointment.html', {'form': form, 'appointment': appointment})
+
+@login_required
+def delete_appointment(request, appointment_id):
+    appointment = Appointment.objects.get(pk=appointment_id)
+    if request.method == 'POST':
+        appointment.delete()
+        return redirect('appointment_list')
+    return render(request, 'scheduling/delete_appointment.html', {'appointment': appointment})
