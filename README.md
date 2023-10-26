@@ -2,11 +2,13 @@
 
 Fashion Designs Information System is a web application that allows fashion designers to manage their appointments and clients, upload and showcase their design work, and interact with clients in a convenient and efficient manner.
 
-![Appointments](/images/appointments.png)
+![Home](https://github.com/Levi-Chinecherem/fashion-designs-information-system/blob/main/sample%20outputs/p1.png)
 
-![Design Upload](/images/design-upload.png)
+![Appointments](https://github.com/Levi-Chinecherem/fashion-designs-information-system/blob/main/sample%20outputs/p4.png)
 
-![List of Designs](/images/designs-list.png)
+![Design Upload](https://github.com/Levi-Chinecherem/fashion-designs-information-system/blob/main/sample%20outputs/p3.png)
+
+![List of Designs](https://github.com/Levi-Chinecherem/fashion-designs-information-system/blob/main/sample%20outputs/p2.png)
 
 ## Features
 
