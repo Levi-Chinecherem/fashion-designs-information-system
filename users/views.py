@@ -12,7 +12,7 @@ def register(request):
             user = form.save()
             # Determine the user's group choice
             group_name = request.POST.get('group')  # You need to add this field to your form
-            group = Group.objects.get(name=group_name)
+            group = Group.objects.get(name='Designer')
             user.groups.add(group)
             # Log the user in after registration
             login(request, user)

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}View Appointment - Fashion Designs Information System{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="display-4">View Appointment</h2>
+        <div class="card">
+            <div class="card-body">
+                <h3>Designer: {{ appointment.designer.username }}</h3>
+                <p>Date: {{ appointment.date }}</p>
+                <p>Start Time: {{ appointment.start_time }}</p>
+                <p>End Time: {{ appointment.end_time }}</p>
+                <p>Status: {{ appointment.status }}</p>
+                <p>Description: {{ appointment.description }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

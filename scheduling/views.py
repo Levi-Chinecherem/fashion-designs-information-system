@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Appointment
 from .forms import AppointmentForm, ContactForm
 from .models import Availability
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 
 def contact_us(request):
@@ -42,6 +43,11 @@ def create_appointment(request):
 def appointment_list(request):
     appointments = Appointment.objects.filter(client=request.user)
     return render(request, 'scheduling/appointment_list.html', {'appointments': appointments})
+
+@login_required
+def view_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, pk=appointment_id)
+    return render(request, 'scheduling/view_appointment.html', {'appointment': appointment})
 
 @login_required
 def update_appointment(request, appointment_id):
