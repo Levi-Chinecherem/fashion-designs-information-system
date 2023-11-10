@@ -6,11 +6,30 @@
     <div class="container mt-4">
         <h2 class="display-4">Your Appointments</h2>
         <div class="row">
-            {% for appointment in appointments %}
+            <h3>Appointments as Client:</h3>
+            <p class="card-text">You booked others for the below appointments</p>
+            {% for appointment in client_appointments  %}
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title">Designer: {{ appointment.designer.username }}</h3>
+                            <p class="card-text">Date: {{ appointment.date }}</p>
+                            <p class="card-text">Start Time: {{ appointment.start_time }}</p>
+                            <p class="card-text">End Time: {{ appointment.end_time }}</p>
+                            <a href="{% url 'view_appointment' appointment.id %}" class="btn btn-primary">
+                                View Details <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}<br><hr>
+            <h3>Appointments as Designer:</h3>
+            <p class="card-text">You have been booked for the below appointments</p>
+            {% for appointment in designer_appointments  %}
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">Client: {{ appointment.client.username }}</h3>
                             <p class="card-text">Date: {{ appointment.date }}</p>
                             <p class="card-text">Start Time: {{ appointment.start_time }}</p>
                             <p class="card-text">End Time: {{ appointment.end_time }}</p>

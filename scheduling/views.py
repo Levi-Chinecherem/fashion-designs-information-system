@@ -41,8 +41,22 @@ def create_appointment(request):
 
 @login_required
 def appointment_list(request):
-    appointments = Appointment.objects.filter(client=request.user)
-    return render(request, 'scheduling/appointment_list.html', {'appointments': appointments})
+    # Retrieve appointments where the current user is the client
+    client_appointments = Appointment.objects.filter(client=request.user)
+
+    # Retrieve appointments where the current user is the designer
+    designer_appointments = Appointment.objects.filter(designer=request.user)
+
+    # Combine both sets of appointments for rendering
+    all_appointments = client_appointments | designer_appointments
+
+    context = {
+        'client_appointments': client_appointments,
+        'designer_appointments': designer_appointments,
+        'all_appointments': all_appointments,
+    }
+
+    return render(request, 'scheduling/appointment_list.html', context)
 
 @login_required
 def view_appointment(request, appointment_id):
