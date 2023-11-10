@@ -13,6 +13,12 @@
                 <p>End Time: {{ appointment.end_time }}</p>
                 <p>Status: {{ appointment.status }}</p>
                 <p>Description: {{ appointment.description }}</p>
+                
+                {% if appointment.client == user %}
+                    <!-- Only show buttons if the logged-in user is the client -->
+                    {% comment %} <a href="{% url 'update_appointment' appointment.id %}" class="btn btn-primary">Update</a> {% endcomment %}
+                    <a href="{% url 'delete_appointment' appointment.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
             </div>
         </div>
     </div>
